@@ -18,6 +18,8 @@ Le produit s'appelait Graine jusqu'au 18 nov. 2026 ; il s'appelle désormais Dos
 - [x] Bandeau « Mode démo » tant que la vraie base n'est pas branchée
 - [x] Nouveau nom (Dossio) et nouveau logo : chemise blanche sur fond vert, ligne surlignée en jaune (18 nov. 2026)
 - [ ] Vérifier que le nom Dossio est libre (domaine .fr sur afnic.fr, marque sur data.inpi.fr) avant d'acheter quoi que ce soit
+- [x] Sections inspirées des concurrents : raccourcis par domaine, engagements, avant / avec, 10 parties du dossier, offre conseillée, FAQ IA et ChatGPT, appel final (18 nov. 2026)
+- [ ] Avant la mise en ligne : vérifier que chaque promesse de la page est vraie (rappels 7 jours avant, version Cerfa, paiement Stripe sans engagement)
 - [ ] Pages légales : mentions légales, confidentialité, conditions de vente (avant la mise en ligne)
 
 ## 2. Questionnaire en 5 questions — fait (nuit du 18 nov. 2026)
