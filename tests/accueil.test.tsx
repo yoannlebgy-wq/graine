@@ -2,12 +2,16 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { renderToStaticMarkup } from 'react-dom/server';
 import Accueil from '../src/app/page';
+import CommentCaMarche from '../src/app/comment-ca-marche/page';
+import Tarifs from '../src/app/tarifs/page';
+import Questions from '../src/app/questions/page';
 import RechercheAides, { FicheAide } from '../src/components/RechercheAides';
 import { AIDES_DEMO } from '../src/lib/aides';
 import { rechercherAides } from '../src/lib/recherche';
 
 const html = renderToStaticMarkup(<Accueil />);
-const texte = html.replace(/<[^>]+>/g, ' ').replace(/&#x27;|&apos;/g, "'").replace(/\s+/g, ' ');
+const site = [<Accueil key="a" />, <CommentCaMarche key="c" />, <Tarifs key="t" />, <Questions key="q" />].map((p) => renderToStaticMarkup(p)).join('\n');
+const texte = site.replace(/<[^>]+>/g, ' ').replace(/&#x27;|&apos;/g, "'").replace(/\s+/g, ' ');
 
 test('la page d\'accueil reprend la promesse et les garanties de l\'aperçu', () => {
   assert.match(texte, /Trouvez les subventions de votre association\. Dossio écrit le dossier\./);
@@ -43,6 +47,26 @@ test('aucun résultat affiché avant la recherche', () => {
   assert.doesNotMatch(html, /id="acc-zone-resultats"/);
 });
 
+test('l\'accueil est court : ni tarifs, ni FAQ, ni étapes, mais des liens vers ces pages', () => {
+  assert.doesNotMatch(html, /class="tarifs"/);
+  assert.doesNotMatch(html, /<details>/);
+  assert.doesNotMatch(html, /class="etapes"/);
+  for (const href of ['/comment-ca-marche', '/tarifs', '/questions']) assert.match(html, new RegExp(`<a href="${href}"`));
+  assert.match(html, /<section class="hero" id="recherche">/);
+});
+
+test('menu : chaque page séparée a son lien, marqué sur la page ouverte', () => {
+  const tarifs = renderToStaticMarkup(<Tarifs />);
+  assert.match(tarifs, /<a href="\/tarifs" aria-current="page">Tarifs<\/a>/);
+  assert.doesNotMatch(tarifs, /<a href="\/questions" aria-current/);
+  assert.doesNotMatch(html, /aria-current="page"/);
+  for (const [Page, titre] of [[CommentCaMarche, 'Comment ça marche'], [Tarifs, 'Tarifs'], [Questions, 'Questions fréquentes']] as const) {
+    const h = renderToStaticMarkup(<Page />);
+    assert.match(h, new RegExp(`<h1 id="[^"]+">${titre}</h1>`));
+    assert.match(h, /<a class="bouton grand" href="\/#recherche">Chercher mes aides<\/a>/, `appel final sur ${titre}`);
+  }
+});
+
 const resultat = rechercherAides(
   { type: 'association', departement: '82', theme: 'sport', titre: '', description: 'Un minibus pour le club' },
   AIDES_DEMO,
@@ -69,7 +93,7 @@ test('résultats vides : message d\'aide', () => {
 });
 
 test('nouveau nom : Dossio partout, plus aucune trace de « Graine » sur la page', () => {
-  assert.doesNotMatch(html, /Graine/);
+  assert.doesNotMatch(site, /Graine/);
   assert.ok((texte.match(/Dossio/g) || []).length >= 8);
   assert.match(texte, /Dossio — aides issues d'/);
   assert.match(texte, /il ne l'invente pas : il la surligne/);

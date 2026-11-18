@@ -46,7 +46,11 @@ Les tests ne lancent pas de navigateur : la page d'accueil est rendue en HTML av
 ## Organisation
 
 ```
-src/app/page.tsx                 page d'accueil (reprise de l'aperçu)
+src/app/page.tsx                 accueil : promesse, questionnaire, résultats, liens vers les autres pages
+src/app/comment-ca-marche/       page « Comment ça marche » (étapes, avant / avec, extrait de dossier)
+src/app/tarifs/                  page « Tarifs »
+src/app/questions/               page « Questions fréquentes »
+src/components/Cadre.tsx         en-tête avec le menu, pied de page, appel final des pages secondaires
 src/app/inscription/page.tsx     arrivée après « Rédiger ce dossier (offert) » (provisoire)
 src/app/api/recherche/route.ts   POST /api/recherche : l'outil gratuit « Chercher mes aides »
 src/components/RechercheAides.tsx  questionnaire en 5 questions et fiches de résultats

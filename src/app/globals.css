@@ -224,3 +224,21 @@ details p { margin: 10px 0 0; color: var(--encre-douce); }
   .engagements ul { grid-template-columns: 1fr 1fr; }
   .avant-apres { grid-template-columns: 1fr; }
 }
+
+/* ---------- site en plusieurs pages */
+#recherche { scroll-margin-top: 72px; }
+.cartes-suite { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.cartes-suite a { display: block; height: 100%; background: #fff; border: 1px solid var(--filet); border-radius: var(--rayon); padding: 20px; text-decoration: none; color: var(--encre); }
+.cartes-suite a:hover { border-color: var(--chemise); box-shadow: var(--ombre-chemise); }
+.cartes-suite strong { display: block; font-size: 1.15rem; color: var(--chemise-fonce); margin-bottom: 6px; }
+.cartes-suite strong::after { content: ' →'; }
+.cartes-suite span { color: var(--encre-douce); font-size: .95rem; }
+@media (max-width: 860px) { .cartes-suite { grid-template-columns: 1fr; } }
+
+/* ---------- menu sur téléphone : logo sur sa ligne, menu en dessous, qui défile au besoin */
+.logo svg, .logo img { flex-shrink: 0; }
+@media (max-width: 600px) {
+  .entete .conteneur { flex-wrap: wrap; gap: 4px 16px; padding: 8px 0; min-height: 0; }
+  .entete .nav { width: 100%; flex-wrap: nowrap; overflow-x: auto; gap: 2px; margin: 0 -4px; scrollbar-width: none; }
+  .entete .nav a { white-space: nowrap; padding: 6px 10px; font-size: .95rem; }
+}

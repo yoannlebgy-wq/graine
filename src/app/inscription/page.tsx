@@ -3,6 +3,7 @@
 // Les comptes (étape 6 du PLAN) et la rédaction (étape 4) ne sont pas encore construits :
 // la page rappelle l'aide choisie et dit honnêtement ce qui arrive.
 import { useEffect, useState } from 'react';
+import Cadre from '../../components/Cadre';
 import { CLE_EN_ATTENTE } from '../../components/RechercheAides';
 
 type EnAttente = { aide_id?: string; aide_nom?: string } | null;
@@ -19,8 +20,8 @@ export default function Inscription() {
   }, []);
 
   return (
-    <main className="app-principal">
-      <div className="etroit">
+    <Cadre page="accueil">
+      <div className="etroit app-principal">
         <h1>Créer mon compte</h1>
         {attente?.aide_nom ? (
           <div className="message succes">
@@ -33,6 +34,6 @@ export default function Inscription() {
         </p>
         <a className="bouton" href="/">Revenir à la recherche</a>
       </div>
-    </main>
+    </Cadre>
   );
 }

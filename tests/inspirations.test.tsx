@@ -2,11 +2,15 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { renderToStaticMarkup } from 'react-dom/server';
 import Accueil from '../src/app/page';
+import CommentCaMarche from '../src/app/comment-ca-marche/page';
+import Tarifs from '../src/app/tarifs/page';
+import Questions from '../src/app/questions/page';
 import Raccourcis, { RACCOURCIS, choisirDomaine } from '../src/components/Raccourcis';
 import { REFERENCE } from '../src/lib/reference';
 
 const html = renderToStaticMarkup(<Accueil />);
-const texte = html.replace(/<[^>]+>/g, ' ').replace(/&#x27;|&apos;/g, "'").replace(/\s+/g, ' ');
+const site = [<Accueil key="a" />, <CommentCaMarche key="c" />, <Tarifs key="t" />, <Questions key="q" />].map((p) => renderToStaticMarkup(p)).join('\n');
+const texte = site.replace(/<[^>]+>/g, ' ').replace(/&#x27;|&apos;/g, "'").replace(/\s+/g, ' ');
 
 test('raccourcis par domaine : 5 puces qui correspondent à de vrais domaines', () => {
   const r = renderToStaticMarkup(<Raccourcis />);
@@ -24,24 +28,24 @@ test('choisirDomaine règle le menu « Domaine du projet »', () => {
 });
 
 test('bandeau d\'engagements : 4 engagements vérifiables', () => {
-  assert.equal((html.match(/<section class="engagements"[\s\S]*?<\/section>/)?.[0].match(/<li>/g) || []).length, 4);
+  assert.equal((site.match(/<section class="engagements"[\s\S]*?<\/section>/)?.[0].match(/<li>/g) || []).length, 4);
   assert.match(texte, /Dossio n'est pas l'administration et ne dépose rien à votre place/);
 });
 
 test('avant / avec : 4 difficultés et 4 réponses', () => {
-  const bloc = html.match(/<div class="avant-apres">[\s\S]*?<\/section>/)?.[0] ?? '';
+  const bloc = site.match(/<div class="avant-apres">[\s\S]*?<\/section>/)?.[0] ?? '';
   assert.equal((bloc.match(/<li>/g) || []).length, 8);
   assert.match(texte, /Monter un dossier, avant et avec Dossio/);
 });
 
 test('les 10 parties du dossier sont listées', () => {
-  const bloc = html.match(/<ul class="parties">[\s\S]*?<\/ul>/)?.[0] ?? '';
+  const bloc = site.match(/<ul class="parties">[\s\S]*?<\/ul>/)?.[0] ?? '';
   assert.equal((bloc.match(/<li>/g) || []).length, 10);
   assert.match(bloc, /Lettre de demande/);
 });
 
 test('tarifs : offre conseillée et réassurance', () => {
-  assert.match(html, /Association <span class="badge">Conseillé<\/span>/);
+  assert.match(site, /Association <span class="badge">Conseillé<\/span>/);
   assert.match(texte, /Sans engagement : résiliable à tout moment\./);
 });
 
@@ -52,7 +56,7 @@ test('FAQ : objections sur l\'IA et ChatGPT', () => {
 
 test('appel final avec un bouton vers le questionnaire', () => {
   assert.match(texte, /Prêt à trouver vos aides \? Cinq questions, sans compte\./);
-  assert.match(html, /<section class="bande appel-final"/);
+  assert.match(site, /<section class="bande appel-final"/);
 });
 
 test('aucune preuve inventée : ni témoignage, ni logo client, ni chiffre d\'utilisateurs', () => {

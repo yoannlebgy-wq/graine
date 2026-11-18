@@ -124,7 +124,7 @@ export default function RechercheAides({ children, resultatInitial = null }: Pro
 
   return (
     <>
-      <section className="hero">
+      <section className="hero" id="recherche">
         <div className="conteneur">
           {children}
           <div className="chemise" data-onglet="Ma recherche">
