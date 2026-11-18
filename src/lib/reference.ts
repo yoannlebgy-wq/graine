@@ -1,4 +1,4 @@
-// Données de référence de Graine : domaines, types de structure, départements,
+// Données de référence de Dossio : domaines, types de structure, départements,
 // parties du dossier et offres. Reprises telles quelles de l'aperçu cliquable.
 import donnees from './donnees/reference.json';
 

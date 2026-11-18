@@ -6,7 +6,7 @@ import { validerQuestionnaire, type ReponsesQuestionnaire } from '../lib/questio
 import type { AideTrouvee, ResultatRecherche } from '../lib/recherche';
 import { REFERENCE } from '../lib/reference';
 
-export const CLE_EN_ATTENTE = 'graine_en_attente';
+export const CLE_EN_ATTENTE = 'dossio_en_attente';
 
 function niveau(score: number): string {
   if (score >= 70) return '';
@@ -68,7 +68,7 @@ export function ListeResultats({ resultat, onRediger }: { resultat: ResultatRech
             {resultat.message || 'Aucune aide ouverte trouvée pour ces critères. Essayez un autre domaine, ou laissez la commune vide.'}
           </div>
         )}
-        <p className="aide-champ">Graine vous oriente : vérifiez toujours les conditions sur la fiche officielle avant de déposer.</p>
+        <p className="aide-champ">Dossio vous oriente : vérifiez toujours les conditions sur la fiche officielle avant de déposer.</p>
       </div>
     </section>
   );
@@ -91,7 +91,7 @@ export default function RechercheAides({ children, resultatInitial = null }: Pro
       setMessage({ type: 'erreur', texte: validation.message });
       return;
     }
-    setMessage({ type: 'chargement', texte: 'Graine cherche les aides qui correspondent…' });
+    setMessage({ type: 'chargement', texte: 'Dossio cherche les aides qui correspondent…' });
     setEnCours(true);
     try {
       const r = await fetch('/api/recherche', {

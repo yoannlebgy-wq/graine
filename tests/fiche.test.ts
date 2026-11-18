@@ -50,6 +50,6 @@ test('message d\'attente avec le nom de l\'aide', () => {
     messageRedaction('Fonds sport', true),
     'Votre dossier offert pour « Fonds sport » est en cours de rédaction. Comptez 20 à 40 secondes.',
   );
-  assert.equal(messageRedaction('Fonds sport', false), 'Graine rédige votre dossier pour « Fonds sport ». Comptez 20 à 40 secondes.');
-  assert.equal(messageRedaction(null, true), 'Graine rédige votre dossier. Comptez 20 à 40 secondes.');
+  assert.equal(messageRedaction('Fonds sport', false), 'Dossio rédige votre dossier pour « Fonds sport ». Comptez 20 à 40 secondes.');
+  assert.equal(messageRedaction(null, true), 'Dossio rédige votre dossier. Comptez 20 à 40 secondes.');
 });

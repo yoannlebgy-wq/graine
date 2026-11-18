@@ -1,6 +1,6 @@
-# Graine
+# Dossio
 
-Graine trouve les aides publiques et les fondations qui correspondent au projet d'une association, d'un·e artiste ou d'une petite entreprise, puis rédige avec Claude le dossier de demande adapté à chaque financeur (présentation, objectifs, budget, lettre), à télécharger en Word.
+Dossio (nom de travail précédent : Graine ; le dépôt GitHub s'appelle encore `graine`) trouve les aides publiques et les fondations qui correspondent au projet d'une association, d'un·e artiste ou d'une petite entreprise, puis rédige avec Claude le dossier de demande adapté à chaque financeur (présentation, objectifs, budget, lettre), à télécharger en Word.
 
 Prix prévus : recherche gratuite, 1 dossier offert, puis 19 €/mois ou 149 €/an (Pro 49 €/mois).
 
@@ -53,6 +53,8 @@ src/components/RechercheAides.tsx  questionnaire en 5 questions et fiches de ré
 src/lib/questionnaire.ts         lecture et vérification des 5 réponses
 src/lib/recherche.ts             filtre et classement des aides
 src/lib/fiche.ts                 textes des fiches (source, date limite, bouton)
+src/lib/marque.ts                nom du produit (à un seul endroit)
+src/components/Logo.tsx          logo (symbole dessiné en SVG + nom)
 src/lib/donnees/                 référentiel (départements, domaines…) et aides fictives
 tests/                           tests automatiques
 ```

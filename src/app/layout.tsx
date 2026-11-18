@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import './globals.css';
+import { NOM } from '../lib/marque';
 
 export const metadata: Metadata = {
-  title: 'Graine — trouvez vos subventions, Graine écrit le dossier',
+  title: `${NOM} — trouvez vos subventions, ${NOM} écrit le dossier`,
   description:
-    "Répondez à cinq questions : Graine trouve les aides publiques et les fondations pour votre association ou votre projet d'artiste, puis rédige le dossier de demande.",
+    `Répondez à cinq questions : ${NOM} trouve les aides publiques et les fondations pour votre association ou votre projet d'artiste, puis rédige le dossier de demande.`,
   icons: { icon: '/favicon.svg' },
 };
 

@@ -1,5 +1,7 @@
-// Page d'accueil de Graine, reprise de l'aperçu cliquable (sans la barre « Aperçu »).
+// Page d'accueil de Dossio, reprise de l'aperçu cliquable (sans la barre « Aperçu »).
+import Logo from '../components/Logo';
 import RechercheAides from '../components/RechercheAides';
+import { ACCROCHE, NOM } from '../lib/marque';
 
 export default function Accueil() {
   return (
@@ -9,10 +11,7 @@ export default function Accueil() {
       </div>
       <header className="entete">
         <div className="conteneur">
-          <a className="logo" href="/">
-            <img src="/favicon.svg" alt="" width={30} height={30} />
-            Graine
-          </a>
+          <Logo />
           <nav className="nav" aria-label="Navigation principale">
             <a href="#tarifs">Tarifs</a>
             <a href="/inscription">Se connecter</a>
@@ -23,10 +22,10 @@ export default function Accueil() {
       <main>
         <RechercheAides>
           <div className="promesse">
-            <h1>Trouvez les subventions de votre association. Graine écrit le dossier.</h1>
+            <h1>{ACCROCHE}</h1>
             <p className="garanties-mobile">Recherche gratuite, sans compte. 1 dossier offert, sans carte bancaire. Rien d&apos;inventé.</p>
             <p>
-              Répondez à cinq questions sur votre projet. Graine cherche parmi les aides publiques et les fondations, puis
+              Répondez à cinq questions sur votre projet. Dossio cherche parmi les aides publiques et les fondations, puis
               rédige une demande adaptée à chaque financeur. Vous relisez, vous complétez, vous envoyez.
             </p>
             <ul className="preuves">
@@ -43,11 +42,11 @@ export default function Accueil() {
             <ol className="etapes">
               <li>
                 <h3>Décrivez votre projet</h3>
-                <p>Cinq questions : qui vous êtes, où, quoi, combien, quand. Graine retient votre structure pour les prochaines demandes.</p>
+                <p>Cinq questions : qui vous êtes, où, quoi, combien, quand. Dossio retient votre structure pour les prochaines demandes.</p>
               </li>
               <li>
                 <h3>Choisissez une aide</h3>
-                <p>Graine classe les aides qui correspondent, avec la raison et la date limite. Chaque aide renvoie vers sa fiche officielle.</p>
+                <p>Dossio classe les aides qui correspondent, avec la raison et la date limite. Chaque aide renvoie vers sa fiche officielle.</p>
               </li>
               <li>
                 <h3>Relisez le dossier rédigé</h3>
@@ -62,15 +61,15 @@ export default function Accueil() {
             <div>
               <h2 id="titre-extrait">Un dossier honnête, prêt à relire</h2>
               <p>
-                Graine écrit à partir de ce que vous lui dites, et seulement ça. Quand une information manque, elle ne
-                l&apos;invente pas : elle la surligne pour que vous la complétiez.
+                Dossio écrit à partir de ce que vous lui dites, et seulement ça. Quand une information manque, il ne
+                l&apos;invente pas : il la surligne pour que vous la complétiez.
               </p>
               <p>
-                Vous gardez la main sur chaque partie : modifiez-la, ou demandez à Graine de la réécrire avec votre consigne,
+                Vous gardez la main sur chaque partie : modifiez-la, ou demandez à Dossio de la réécrire avec votre consigne,
                 par exemple « plus court » ou « insister sur les jeunes du quartier ».
               </p>
             </div>
-            <div className="feuille-dossier" aria-label="Extrait d'un dossier rédigé par Graine">
+            <div className="feuille-dossier" aria-label={`Extrait d'un dossier rédigé par ${NOM}`}>
               <span className="tampon" aria-hidden="true">Dossier prêt</span>
               <h3>Objectifs</h3>
               <p>Permettre aux 45 jeunes licenciés du club de se rendre aux compétitions sans dépendre des parents disponibles.</p>
@@ -139,16 +138,16 @@ export default function Accueil() {
               </p>
             </details>
             <details>
-              <summary>Graine dépose-t-il le dossier pour moi ?</summary>
+              <summary>Dossio dépose-t-il le dossier pour moi ?</summary>
               <p>Non. Vous restez le demandeur : vous relisez, complétez et déposez le dossier sur le site du financeur, ou l&apos;envoyez par courrier.</p>
             </details>
             <details>
-              <summary>Est-ce que Graine garantit l&apos;obtention de la subvention ?</summary>
-              <p>Non. Personne ne peut le garantir. Graine vous fait gagner du temps et vous aide à présenter clairement votre projet.</p>
+              <summary>Est-ce que Dossio garantit l&apos;obtention de la subvention ?</summary>
+              <p>Non. Personne ne peut le garantir. Dossio vous fait gagner du temps et vous aide à présenter clairement votre projet.</p>
             </details>
             <details>
               <summary>Je suis artiste, sans association. Ça marche pour moi ?</summary>
-              <p>Oui : choisissez « artiste ou porteur·se de projet ». Graine cherche alors les aides ouvertes aux personnes et aux associations.</p>
+              <p>Oui : choisissez « artiste ou porteur·se de projet ». Dossio cherche alors les aides ouvertes aux personnes et aux associations.</p>
             </details>
             <details>
               <summary>Que faites-vous de mes informations ?</summary>
@@ -161,7 +160,7 @@ export default function Accueil() {
       <footer className="pied">
         <div className="conteneur">
           <span>
-            Graine — aides issues d&apos;
+            {NOM} — aides issues d&apos;
             <a href="https://aides-territoires.beta.gouv.fr/" target="_blank" rel="noopener noreferrer">Aides-territoires</a>{' '}
             (Licence Ouverte) et de fondations.
           </span>

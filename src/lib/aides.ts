@@ -1,4 +1,4 @@
-// Le format d'une aide dans Graine, et la liste d'aides fictives du mode démo.
+// Le format d'une aide dans Dossio, et la liste d'aides fictives du mode démo.
 // L'étape 3 du PLAN branchera l'API Aides-territoires sur ce même format.
 import aidesDemo from './donnees/aides-demo.json';
 

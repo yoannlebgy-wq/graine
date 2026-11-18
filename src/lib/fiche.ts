@@ -34,6 +34,6 @@ export function libelleBoutonRediger(dossierOffertDisponible: boolean): string {
 /** Message affiché pendant la rédaction du dossier offert. */
 export function messageRedaction(nomAide: string | null | undefined, offert: boolean): string {
   if (offert && nomAide) return `Votre dossier offert pour « ${nomAide} » est en cours de rédaction. Comptez 20 à 40 secondes.`;
-  if (nomAide) return `Graine rédige votre dossier pour « ${nomAide} ». Comptez 20 à 40 secondes.`;
-  return 'Graine rédige votre dossier. Comptez 20 à 40 secondes.';
+  if (nomAide) return `Dossio rédige votre dossier pour « ${nomAide} ». Comptez 20 à 40 secondes.`;
+  return 'Dossio rédige votre dossier. Comptez 20 à 40 secondes.';
 }

@@ -28,7 +28,7 @@ export default function Inscription() {
           </div>
         ) : null}
         <p>
-          La création de compte et la rédaction des dossiers arrivent dans les prochaines versions de Graine.
+          La création de compte et la rédaction des dossiers arrivent dans les prochaines versions de Dossio.
           En attendant, la recherche d&apos;aides reste gratuite et sans compte.
         </p>
         <a className="bouton" href="/">Revenir à la recherche</a>

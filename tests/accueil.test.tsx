@@ -10,7 +10,7 @@ const html = renderToStaticMarkup(<Accueil />);
 const texte = html.replace(/<[^>]+>/g, ' ').replace(/&#x27;|&apos;/g, "'").replace(/\s+/g, ' ');
 
 test('la page d\'accueil reprend la promesse et les garanties de l\'aperçu', () => {
-  assert.match(texte, /Trouvez les subventions de votre association\. Graine écrit le dossier\./);
+  assert.match(texte, /Trouvez les subventions de votre association\. Dossio écrit le dossier\./);
   assert.match(texte, /Recherche gratuite, sans compte\. 1 dossier offert, sans carte bancaire\. Rien d'inventé\./);
   assert.match(texte, /Répondez à cinq questions sur votre projet/);
 });
@@ -66,4 +66,17 @@ test('résultats : compteur et une fiche par aide', () => {
 test('résultats vides : message d\'aide', () => {
   const page = renderToStaticMarkup(<RechercheAides resultatInitial={{ aides: [], total: 0 }} />);
   assert.match(page, /Aucune aide ouverte trouvée pour ces critères/);
+});
+
+test('nouveau nom : Dossio partout, plus aucune trace de « Graine » sur la page', () => {
+  assert.doesNotMatch(html, /Graine/);
+  assert.ok((texte.match(/Dossio/g) || []).length >= 8);
+  assert.match(texte, /Dossio — aides issues d'/);
+  assert.match(texte, /il ne l'invente pas : il la surligne/);
+});
+
+test('logo : symbole dessiné dans la page (sans image externe) et lien vers l\'accueil', () => {
+  assert.match(html, /<a class="logo" href="\/" aria-label="Dossio, accueil"><svg[^>]*viewBox="0 0 32 32"/);
+  assert.match(html, /fill="#fff07a"/);
+  assert.doesNotMatch(html, /<img src="\/favicon.svg"/);
 });

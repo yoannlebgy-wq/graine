@@ -1,8 +1,10 @@
-# Plan de construction de Graine
+# Plan de construction de Dossio
 
 Une tranche utile par nuit, dans cet ordre. On coche ce qui est fait ; chaque étape arrive par une demande de fusion depuis une branche `nuit/AAAA-MM-JJ`.
 
-Références : l'aperçu cliquable (claude.ai/artifact/9eSwfgQiPd7ABeghY8pTWK) et l'onglet « Analyse complète Graine » du rapport du matin.
+Références : l'aperçu cliquable (claude.ai/artifact/9eSwfgQiPd7ABeghY8pTWK) et l'onglet « Analyse complète Dossio » du rapport du matin.
+
+Le produit s'appelait Graine jusqu'au 18 nov. 2026 ; il s'appelle désormais Dossio.
 
 ## 0. Squelette — fait (nuit du 18 nov. 2026)
 
@@ -14,6 +16,8 @@ Références : l'aperçu cliquable (claude.ai/artifact/9eSwfgQiPd7ABeghY8pTWK) e
 
 - [x] Promesse, garanties sur téléphone, « Comment ça marche », extrait de dossier, tarifs (dont « soit 12,42 € par mois »), FAQ, pied de page
 - [x] Bandeau « Mode démo » tant que la vraie base n'est pas branchée
+- [x] Nouveau nom (Dossio) et nouveau logo : chemise blanche sur fond vert, ligne surlignée en jaune (18 nov. 2026)
+- [ ] Vérifier que le nom Dossio est libre (domaine .fr sur afnic.fr, marque sur data.inpi.fr) avant d'acheter quoi que ce soit
 - [ ] Pages légales : mentions légales, confidentialité, conditions de vente (avant la mise en ligne)
 
 ## 2. Questionnaire en 5 questions — fait (nuit du 18 nov. 2026)
@@ -34,7 +38,7 @@ Références : l'aperçu cliquable (claude.ai/artifact/9eSwfgQiPd7ABeghY8pTWK) e
 ## 4. Rédaction du dossier avec l'API Claude
 
 - [ ] 10 parties (présentation, contexte, projet, objectifs, public, moyens, calendrier, budget, évaluation, lettre)
-- [ ] Consignes : n'écrire qu'avec les faits donnés, marquer `[À COMPLÉTER : …]` ce qui manque, ne jamais mentionner Graine ni l'IA dans le dossier, parties lisibles seules (Cerfa 12156)
+- [ ] Consignes : n'écrire qu'avec les faits donnés, marquer `[À COMPLÉTER : …]` ce qui manque, ne jamais mentionner Dossio ni l'IA dans le dossier, parties lisibles seules (Cerfa 12156)
 - [ ] Message d'attente « Votre dossier offert pour « … » est en cours de rédaction » (texte déjà prêt dans `src/lib/fiche.ts`)
 - [ ] Réécriture d'une partie avec une consigne ; version Cerfa 12156 rubrique par rubrique ; contrôle de la part de subvention
 - [ ] Mode démo sans clé (rédaction simulée, comme l'aperçu)
