@@ -2,7 +2,7 @@
 
 Une tranche utile par nuit, dans cet ordre. On coche ce qui est fait ; chaque étape arrive par une demande de fusion depuis une branche `nuit/AAAA-MM-JJ`.
 
-Références : l'aperçu cliquable (claude.ai/artifact/9eSwfgQiPd7ABeghY8pTWK) et l'onglet « Analyse complète Dossio » du rapport du matin.
+Références : l'aperçu cliquable (claude.ai/artifact/9eSwfgQiPd7ABeghY8pTWK) et l'onglet « Analyse complète Graine (19 nov.) » du rapport du matin.
 
 Le produit s'appelait Graine jusqu'au 18 nov. 2026 ; il s'appelle désormais Dossio.
 
