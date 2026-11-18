@@ -20,7 +20,8 @@ Le produit s'appelait Graine jusqu'au 18 nov. 2026 ; il s'appelle désormais Dos
 - [ ] Vérifier que le nom Dossio est libre (domaine .fr sur afnic.fr, marque sur data.inpi.fr) avant d'acheter quoi que ce soit
 - [x] Sections inspirées des concurrents : raccourcis par domaine, engagements, avant / avec, 10 parties du dossier, offre conseillée, FAQ IA et ChatGPT, appel final (18 nov. 2026)
 - [ ] Avant la mise en ligne : vérifier que chaque promesse de la page est vraie (rappels 7 jours avant, version Cerfa, paiement Stripe sans engagement)
-- [ ] Pages légales : mentions légales, confidentialité, conditions de vente (avant la mise en ligne)
+- [x] Modèles de pages légales (mentions légales, confidentialité, conditions de vente) avec les passages à compléter ; page introuvable
+- [ ] Compléter les pages légales et les faire relire
 
 ## 2. Questionnaire en 5 questions — fait (nuit du 18 nov. 2026)
 
@@ -30,24 +31,30 @@ Le produit s'appelait Graine jusqu'au 18 nov. 2026 ; il s'appelle désormais Dos
 - [x] Fiche de résultat : raison, date limite, « à vérifier », **source et date de mise à jour**, bouton **« Rédiger ce dossier (offert) »**
 - [x] Page d'arrivée provisoire `/inscription` qui garde l'aide choisie
 
-## 3. Recherche réelle via l'API Aides-territoires — prochaine étape
+## 3. Recherche réelle via l'API Aides-territoires — fait (18 nov. 2026, soir)
 
-- [ ] Client de l'API (version fixée), conversion vers le format `Aide` de `src/lib/aides.ts` (`source: 'aides-territoires'`, `maj` = date de mise à jour de la fiche)
-- [ ] Cache d'une nuit, repli sur la démo si l'API ne répond pas, compteur hebdomadaire des aides ouvertes aux associations (l'outil se recentre sur les collectivités)
-- [ ] Liste de fondations tenue à la main (`source: 'fondation'`)
-- [ ] Tests avec des réponses enregistrées de l'API (aucun appel réseau dans les tests)
+- [x] Client de l'API v1.1 (src/lib/aides-territoires.ts) : toutes les pages, délai maximal, conversion vers le format `Aide`
+- [x] Tri fait par Dossio, car l'API ignore le filtre « public » et garde des fiches anciennes : public (associations, particuliers, entreprises), territoire (France, région, département, commune ; intercommunalités écartées faute de correspondance), date limite passée, fiche sans date non mise à jour depuis 24 mois
+- [x] Cache de 12 h, repli sur les aides fictives avec un avertissement si l'API ne répond pas, mode démo forcé (`DOSSIO_MODE_DEMO=1`)
+- [x] Liste d'aides vérifiées à la main sur le site du financeur (src/lib/donnees/aides-verifiees.json, 7 aides)
+- [x] Tests avec des réponses au format de l'API (aucun appel réseau dans les tests)
+- [ ] Tester sur le vrai site : combien d'aides restent pour les associations après le tri (l'API n'était pas joignable depuis la session de développement)
+- [ ] Table intercommunalités → départements pour ne plus écarter les aides des EPCI
+- [ ] Mettre à jour chaque semaine la liste vérifiée (veille de nuit)
 
-## 4. Rédaction du dossier avec l'API Claude
+## 4. Rédaction du dossier avec l'API Claude — fait (18 nov. 2026, soir)
 
-- [ ] 10 parties (présentation, contexte, projet, objectifs, public, moyens, calendrier, budget, évaluation, lettre)
-- [ ] Consignes : n'écrire qu'avec les faits donnés, marquer `[À COMPLÉTER : …]` ce qui manque, ne jamais mentionner Dossio ni l'IA dans le dossier, parties lisibles seules (Cerfa 12156)
-- [ ] Message d'attente « Votre dossier offert pour « … » est en cours de rédaction » (texte déjà prêt dans `src/lib/fiche.ts`)
-- [ ] Réécriture d'une partie avec une consigne ; version Cerfa 12156 rubrique par rubrique ; contrôle de la part de subvention
-- [ ] Mode démo sans clé (rédaction simulée, comme l'aperçu)
+- [x] 10 parties (présentation, contexte, projet, objectifs, public, moyens, calendrier, budget, évaluation, lettre)
+- [x] Consignes : n'écrire qu'avec les faits donnés, `[À COMPLÉTER : …]` pour ce qui manque, jamais de mention de Dossio ni de l'IA, parties lisibles seules (Cerfa 12156), ligne « Subvention demandée : … » dans le budget
+- [x] Appel direct à l'API Messages (sans bibliothèque), erreurs en français, réponse JSON vérifiée
+- [x] Mode démo sans clé (rédaction simulée, comme l'aperçu) ; vraie rédaction seulement si `ANTHROPIC_API_KEY` et `DOSSIO_REDACTION_SANS_COMPTE=1` (garde-fou tant qu'il n'y a pas de comptes)
+- [x] Page /dossier : infos facultatives sur la structure, message d'attente, éditeur des 10 parties, budget vérifié (équilibre, part de subvention)
+- [ ] Premier essai réel avec la clé (sur Vercel) et relecture de 3 dossiers
+- [ ] Réécriture d'une partie avec une consigne ; version Cerfa 12156 rubrique par rubrique (déjà dans l'aperçu)
 
-## 5. Export Word
+## 5. Export Word — fait (18 nov. 2026, soir)
 
-- [ ] Fichier `.docx` avec titres, budget en tableau et passages à compléter surlignés
+- [x] Fichier `.docx` avec titres, budget en tableau et passages à compléter surlignés en jaune (bibliothèque `docx`)
 
 ## 6. Comptes
 

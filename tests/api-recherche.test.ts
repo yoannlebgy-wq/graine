@@ -2,6 +2,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { POST } from '../src/app/api/recherche/route';
 
+process.env.DOSSIO_MODE_DEMO = '1';
+
 const appel = (corps: unknown) =>
   POST(new Request('http://localhost/api/recherche', {
     method: 'POST',

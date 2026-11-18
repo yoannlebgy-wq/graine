@@ -1,10 +1,9 @@
 // POST /api/recherche — l'outil gratuit « Chercher mes aides », sans compte.
 // Corps attendu : { "projet": { type, departement, commune, theme, description, budget, date_debut } }.
-// Pour l'instant, la recherche porte sur les aides fictives du mode démo ;
-// l'étape 3 du PLAN la branchera sur l'API Aides-territoires.
-import { AIDES_DEMO } from '../../../lib/aides';
+// Les aides viennent d'Aides-territoires et de la liste vérifiée à la main (voir src/lib/source-aides.ts).
 import { validerQuestionnaire } from '../../../lib/questionnaire';
 import { rechercherAides } from '../../../lib/recherche';
+import { obtenirCatalogue } from '../../../lib/source-aides';
 
 export async function POST(requete: Request): Promise<Response> {
   let corps: unknown;
@@ -18,6 +17,7 @@ export async function POST(requete: Request): Promise<Response> {
   if (!validation.ok) {
     return Response.json({ erreur: validation.message, champs: validation.erreurs }, { status: 400 });
   }
-  const resultat = rechercherAides(validation.projet, AIDES_DEMO);
-  return Response.json({ ...resultat, demo: true });
+  const catalogue = await obtenirCatalogue();
+  const resultat = rechercherAides(validation.projet, catalogue.aides);
+  return Response.json({ ...resultat, demo: catalogue.demo, ...(catalogue.message ? { avertissement: catalogue.message } : {}) });
 }

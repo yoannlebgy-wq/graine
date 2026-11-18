@@ -31,7 +31,12 @@ npm run dev
 
 Puis ouvrir http://localhost:3000.
 
-Pour l'instant, la recherche porte sur 16 aides fictives, toutes nommées « (exemple démo) ». Un bandeau jaune le rappelle en haut de la page.
+Sans aucun réglage, le site cherche les vraies aides (Aides-territoires + liste vérifiée à la main) et la rédaction est simulée.
+Réglages utiles dans `.env.local` (voir `.env.example`) :
+
+- `DOSSIO_MODE_DEMO=1` : seulement les 16 aides fictives, sans appel à Aides-territoires ;
+- `ANTHROPIC_API_KEY` + `DOSSIO_REDACTION_SANS_COMPTE=1` : vraie rédaction par Claude (pour tester : sans comptes, n'importe qui peut l'utiliser) ;
+- `NEXT_PUBLIC_DOSSIO_ETAT` : bandeau du haut (`demo`, `essai` ou `production`).
 
 ## Tester
 
@@ -59,7 +64,14 @@ src/lib/recherche.ts             filtre et classement des aides
 src/lib/fiche.ts                 textes des fiches (source, date limite, bouton)
 src/lib/marque.ts                nom du produit (à un seul endroit)
 src/components/Logo.tsx          logo (symbole dessiné en SVG + nom)
-src/lib/donnees/                 référentiel (départements, domaines…) et aides fictives
+src/lib/aides-territoires.ts     branchement sur l'API Aides-territoires et tri des aides
+src/lib/source-aides.ts          catalogue : Aides-territoires + aides vérifiées, cache, mode démo
+src/lib/redaction.ts             rédaction : consignes et appel à Claude, rédaction simulée
+src/lib/word.ts                  export Word
+src/app/dossier/                 page du dossier (rédaction, relecture, Word)
+src/app/api/dossiers/            POST rediger et POST word
+src/app/mentions-legales, confidentialite, cgv   modèles de pages légales à compléter
+src/lib/donnees/                 référentiel, aides vérifiées à la main, aides fictives
 tests/                           tests automatiques
 ```
 

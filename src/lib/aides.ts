@@ -2,7 +2,8 @@
 // L'étape 3 du PLAN branchera l'API Aides-territoires sur ce même format.
 import aidesDemo from './donnees/aides-demo.json';
 
-export type SourceAide = 'aides-territoires' | 'fondation' | 'demo';
+/** aides-territoires : base publique ; officielle : fiche lue à la main sur le site du financeur ; fondation ; demo : fictive. */
+export type SourceAide = 'aides-territoires' | 'officielle' | 'fondation' | 'demo';
 
 export type Aide = {
   id: string;

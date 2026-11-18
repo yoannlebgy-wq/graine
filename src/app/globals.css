@@ -242,3 +242,36 @@ details p { margin: 10px 0 0; color: var(--encre-douce); }
   .entete .nav { width: 100%; flex-wrap: nowrap; overflow-x: auto; gap: 2px; margin: 0 -4px; scrollbar-width: none; }
   .entete .nav a { white-space: nowrap; padding: 6px 10px; font-size: .95rem; }
 }
+
+/* ---------- écran du dossier (repris de l'espace membre de l'aperçu) */
+/* ---------- espace connecté */
+.app-principal { padding: 32px 0 64px; }
+.carte { background: #fff; border: 1px solid var(--filet); border-radius: var(--rayon); padding: 22px; margin-bottom: 18px; }
+.liste-dossiers { width: 100%; border-collapse: collapse; background: #fff; }
+.liste-dossiers th, .liste-dossiers td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--trame); vertical-align: top; }
+.liste-dossiers th { font-size: .9rem; color: var(--encre-douce); font-weight: 700; }
+.statut { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: .85rem; font-weight: 700; background: var(--trame); }
+.statut.envoye { background: #e3ebf7; color: #2b4f86; }
+.statut.obtenu { background: var(--chemise-clair); color: var(--chemise-fonce); }
+.statut.refuse { background: #f5e4e1; color: var(--alerte); }
+
+.dossier-entete { display: flex; justify-content: space-between; gap: 18px 32px; flex-wrap: wrap; align-items: flex-start; }
+.dossier-entete > div:first-child { flex: 1 1 420px; }
+.dossier-entete > .carte { flex: 0 0 280px; }
+.dossier-outils { display: flex; gap: 10px; flex-wrap: wrap; position: sticky; top: 64px; background: var(--papier); padding: 12px 0; z-index: 5; border-bottom: 1px solid var(--trame); margin-bottom: 18px; }
+.section-dossier { margin-bottom: 22px; }
+.section-dossier .titre-section { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+.section-dossier h2 { font-size: 1.25rem; margin: 0; color: var(--chemise-fonce); }
+.pastille { font-size: .85rem; font-weight: 700; background: var(--surligneur); padding: 2px 8px; border-radius: 999px; }
+.reecriture { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.reecriture input { flex: 1; min-width: 220px; }
+.budget table { width: 100%; border-collapse: collapse; margin-bottom: 14px; }
+.budget th, .budget td { padding: 6px; border-bottom: 1px solid var(--trame); text-align: left; }
+.budget td:last-child, .budget th:last-child { width: 44px; }
+.budget .montant { width: 150px; }
+.budget tfoot td { font-weight: 700; }
+.alerte-budget { color: var(--alerte); font-weight: 700; }
+.budget input { width: 100%; }
+.liens-pied a { margin-left: 0; }
+.legal h2 { font-size: 1.3rem; margin-top: 28px; }
+.legal ul { padding-left: 20px; }

@@ -2,7 +2,18 @@
 // Le menu mène à des pages séparées : Comment ça marche, Tarifs, Questions.
 import type { ReactNode } from 'react';
 import Logo from './Logo';
-import { NOM } from '../lib/marque';
+import { CONTACT, NOM } from '../lib/marque';
+
+/** État affiché en haut de page : NEXT_PUBLIC_DOSSIO_ETAT = demo (par défaut), essai ou production. */
+export function etatSite(env: Record<string, string | undefined> = { NEXT_PUBLIC_DOSSIO_ETAT: process.env.NEXT_PUBLIC_DOSSIO_ETAT }): 'demo' | 'essai' | 'production' {
+  const e = env.NEXT_PUBLIC_DOSSIO_ETAT;
+  return e === 'essai' || e === 'production' ? e : 'demo';
+}
+const BANDEAUX: Record<string, string | null> = {
+  demo: 'Mode démo : les aides affichées sont des exemples fictifs et la rédaction est simulée.',
+  essai: "Version d'essai : les aides sont réelles, vérifiez toujours la fiche officielle. La rédaction peut être simulée.",
+  production: null,
+};
 
 export type PageMenu = 'accueil' | 'comment' | 'tarifs' | 'questions';
 
@@ -15,9 +26,7 @@ export const MENU: { page: Exclude<PageMenu, 'accueil'>; href: string; libelle: 
 export default function Cadre({ page, children }: { page: PageMenu; children: ReactNode }) {
   return (
     <>
-      <div className="bandeau-demo">
-        Mode démo : les aides affichées sont des exemples fictifs. La recherche réelle (Aides-territoires) arrive à l&apos;étape 3.
-      </div>
+      {BANDEAUX[etatSite()] ? <div className="bandeau-demo">{BANDEAUX[etatSite()]}</div> : null}
       <header className="entete">
         <div className="conteneur">
           <Logo />
@@ -44,6 +53,12 @@ export default function Cadre({ page, children }: { page: PageMenu; children: Re
             {MENU.map((m) => (
               <a key={m.page} href={m.href}>{m.libelle}</a>
             ))}
+          </span>
+          <span className="liens-pied">
+            <a href="/mentions-legales">Mentions légales</a>
+            <a href="/confidentialite">Confidentialité</a>
+            <a href="/cgv">Conditions de vente</a>
+            {CONTACT ? <a href={`mailto:${CONTACT}`}>Contact</a> : null}
           </span>
         </div>
       </footer>

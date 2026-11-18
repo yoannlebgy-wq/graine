@@ -61,6 +61,7 @@ export function ListeResultats({ resultat, onRediger }: { resultat: ResultatRech
             </span>
           ) : null}
         </div>
+        {resultat.avertissement ? <div className="message info">{resultat.avertissement}</div> : null}
         {n ? (
           resultat.aides.map((a) => <FicheAide key={a.id} aide={a} onRediger={onRediger} />)
         ) : (
@@ -119,7 +120,12 @@ export default function RechercheAides({ children, resultatInitial = null }: Pro
     } catch {
       /* stockage indisponible : le choix sera redemandé */
     }
-    window.location.href = `/inscription?aide=${encodeURIComponent(aide.id)}`;
+    try {
+      sessionStorage.removeItem('dossio_dossier');
+    } catch {
+      /* sans gravité */
+    }
+    window.location.href = `/dossier?aide=${encodeURIComponent(aide.id)}`;
   }
 
   return (

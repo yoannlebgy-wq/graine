@@ -11,6 +11,8 @@ export function ligneSource(aide: Pick<Aide, 'source' | 'maj'>): string {
   switch (aide.source) {
     case 'aides-territoires':
       return quand ? `Source : Aides-territoires, fiche mise à jour le ${quand}` : 'Source : Aides-territoires';
+    case 'officielle':
+      return quand ? `Source : site du financeur, vérifiée le ${quand}` : 'Source : site du financeur';
     case 'fondation':
       return quand ? `Source : site de la fondation, vérifiée le ${quand}` : 'Source : site de la fondation';
     default:

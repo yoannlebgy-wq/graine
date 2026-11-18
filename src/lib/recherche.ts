@@ -6,7 +6,7 @@ import type { ReponsesQuestionnaire } from './questionnaire';
 import { departement, libelleTheme, typeStructure } from './reference';
 
 export type AideTrouvee = Aide & { score: number; pourquoi: string; a_verifier: string };
-export type ResultatRecherche = { aides: AideTrouvee[]; total: number; message?: string };
+export type ResultatRecherche = { aides: AideTrouvee[]; total: number; message?: string; demo?: boolean; avertissement?: string };
 
 export const NOMBRE_MAX_RESULTATS = 8;
 
