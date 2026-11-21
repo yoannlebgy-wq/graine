@@ -17,7 +17,8 @@ export async function POST(requete: Request): Promise<Response> {
   if (!validation.ok) {
     return Response.json({ erreur: validation.message, champs: validation.erreurs }, { status: 400 });
   }
-  const catalogue = await obtenirCatalogue();
+  // Si Aides-territoires échoue, le code HTTP et le message partent dans les journaux (Vercel : Logs → /api/recherche).
+  const catalogue = await obtenirCatalogue({ journal: (...morceaux) => console.error('[POST /api/recherche]', ...morceaux) });
   const resultat = rechercherAides(validation.projet, catalogue.aides);
   return Response.json({ ...resultat, demo: catalogue.demo, ...(catalogue.message ? { avertissement: catalogue.message } : {}) });
 }

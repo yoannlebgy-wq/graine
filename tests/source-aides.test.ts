@@ -1,9 +1,13 @@
 import { test, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
-import { aidesVerifiees, obtenirCatalogue, trouverAide, viderCache } from '../src/lib/source-aides';
+import { aidesVerifiees, ligneJournalEchec, obtenirCatalogue, trouverAide, viderCache } from '../src/lib/source-aides';
+import { oublierJeton } from '../src/lib/aides-territoires';
 
 const MAINTENANT = new Date('2026-11-18T12:00:00Z');
-beforeEach(() => viderCache());
+beforeEach(() => {
+  viderCache();
+  oublierJeton();
+});
 
 const pageAT = { next: null, results: [{ id: 9, name: 'Aide réelle de test', financers: ['Région'], perimeter: 'France', targeted_audiences: ['Associations'], submission_deadline: '2027-03-01', date_updated: '2026-11-01T10:00:00+01:00' }] };
 
@@ -27,10 +31,50 @@ test('mode réel : aides vérifiées + Aides-territoires, mises en cache', async
   assert.equal(appels, 1, 'deuxième recherche servie par le cache');
 });
 
-test('API en panne : exemples fictifs avec un avertissement, pas de plantage', async () => {
-  const c = await obtenirCatalogue({ env: {}, recuperer: (async () => { throw new Error('réseau'); }) as typeof fetch, maintenant: MAINTENANT });
+test('API en panne : exemples fictifs avec un avertissement, pas de plantage, et une ligne de journal', async () => {
+  const lignes: unknown[][] = [];
+  const c = await obtenirCatalogue({ env: {}, recuperer: (async () => { throw new Error('réseau'); }) as typeof fetch, maintenant: MAINTENANT, journal: (...m) => lignes.push(m) });
   assert.equal(c.demo, true);
   assert.match(c.message ?? '', /ne répond pas/);
+  assert.equal(lignes.length, 1);
+  assert.match(String(lignes[0][0]), /erreur réseau \(réseau\)/);
+});
+
+test('API qui exige un jeton, sans clé : le code HTTP et le message sont journalisés', async () => {
+  const lignes: unknown[][] = [];
+  const recuperer = (async () => new Response('{"code":401,"message":"JWT Token not found"}', { status: 401 })) as typeof fetch;
+  const c = await obtenirCatalogue({ env: {}, recuperer, maintenant: MAINTENANT, journal: (...m) => lignes.push(m) });
+  assert.equal(c.demo, true);
+  const ligne = String(lignes[0][0]);
+  assert.match(ligne, /étape : aides, HTTP 401, message : JWT Token not found/);
+  assert.match(ligne, /AUCUNE clé API/);
+});
+
+test('clé renseignée : connexion puis aides réelles ; la clé n\'apparaît jamais dans le journal', async () => {
+  const appels: string[] = [];
+  const recuperer = (async (url: string, init?: RequestInit) => {
+    appels.push(url);
+    const h = (init?.headers ?? {}) as Record<string, string>;
+    if (url.endsWith('/api/connexion/')) return h['X-AUTH-TOKEN'] === 'cle-secrete' ? new Response('{"token":"jwt"}') : new Response('{"message":"Invalid credentials."}', { status: 401 });
+    return h.Authorization === 'Bearer jwt' ? new Response(JSON.stringify(pageAT)) : new Response('{"code":401,"message":"JWT Token not found"}', { status: 401 });
+  }) as typeof fetch;
+  const c = await obtenirCatalogue({ env: { AIDES_TERRITOIRES_API_KEY: ' cle-secrete ' }, recuperer, maintenant: MAINTENANT, journal: () => assert.fail('aucun échec attendu') });
+  assert.equal(c.demo, false);
+  assert.ok(c.aides.some((a) => a.id === 'at-9'));
+  assert.equal(appels[0], 'https://aides-territoires.beta.gouv.fr/api/connexion/');
+
+  viderCache();
+  oublierJeton();
+  const lignes: unknown[][] = [];
+  await obtenirCatalogue({ env: { AIDES_TERRITOIRES_API_KEY: 'mauvaise-cle' }, recuperer, maintenant: MAINTENANT, journal: (...m) => lignes.push(m) });
+  const ligne = String(lignes[0][0]);
+  assert.match(ligne, /étape : connexion, HTTP 401, message : Invalid credentials\./);
+  assert.match(ligne, /clé API renseignée/);
+  assert.doesNotMatch(ligne, /mauvaise-cle/);
+});
+
+test('ligne de journal pour une erreur inattendue', () => {
+  assert.match(ligneJournalEchec(new Error('boum'), false), /erreur inattendue : boum/);
 });
 
 test('aides vérifiées : vraies fiches, lien https, date de vérification, régions développées', () => {

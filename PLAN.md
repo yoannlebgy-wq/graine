@@ -38,6 +38,8 @@ Le produit s'appelait Graine jusqu'au 18 nov. 2026 ; il s'appelle désormais Dos
 - [x] Cache de 12 h, repli sur les aides fictives avec un avertissement si l'API ne répond pas, mode démo forcé (`DOSSIO_MODE_DEMO=1`)
 - [x] Liste d'aides vérifiées à la main sur le site du financeur (src/lib/donnees/aides-verifiees.json, 7 aides)
 - [x] Tests avec des réponses au format de l'API (aucun appel réseau dans les tests)
+- [x] Authentification ajoutée le 21 nov. 2026 (l'API répond désormais 401 « JWT Token not found » sans jeton) : clé `AIDES_TERRITOIRES_API_KEY` échangée contre un jeton JWT (POST /api/connexion/, en-tête X-AUTH-TOKEN), jeton gardé 23 h et redemandé sur un 401 ; échecs journalisés (étape, code HTTP, message)
+- [ ] Demander la clé API sur aides-territoires.beta.gouv.fr (Mon compte → « Ma clé API ») et la mettre dans Vercel
 - [ ] Tester sur le vrai site : combien d'aides restent pour les associations après le tri (l'API n'était pas joignable depuis la session de développement)
 - [ ] Table intercommunalités → départements pour ne plus écarter les aides des EPCI
 - [ ] Mettre à jour chaque semaine la liste vérifiée (veille de nuit)

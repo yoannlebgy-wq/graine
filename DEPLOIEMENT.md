@@ -33,12 +33,21 @@ L'offre gratuite de Vercel suffit pour tester. Pour vendre, il faudra l'offre Pr
    - `DOSSIO_REDACTION_SANS_COMPTE` = `1` (seulement le temps des tests : sans comptes, n'importe qui pourrait utiliser ta clé)
 5. Deployments → les trois points du dernier déploiement → « Redeploy ». Les variables ne s'appliquent qu'au déploiement suivant.
 
+## 3 bis. Aides-territoires : la clé API (obligatoire depuis 2026)
+
+Sans clé, l'API répond `401 JWT Token not found` et Dossio montre des exemples fictifs.
+
+1. Crée un compte sur `https://aides-territoires.beta.gouv.fr` (bouton « Se connecter » → créer un compte).
+2. Mon compte → « Ma clé API » (adresse : `https://aides-territoires.beta.gouv.fr/comptes/api-token/`) → remplis le formulaire de demande. La demande est examinée par leur équipe : compte quelques jours.
+3. Quand la clé apparaît sur cette page, ajoute-la dans Vercel → Settings → Environment Variables : `AIDES_TERRITOIRES_API_KEY` = la clé (environnements Production et Preview), puis « Redeploy ».
+4. Vérifie : une recherche ne doit plus afficher « La base Aides-territoires ne répond pas ». Sinon, Vercel → Logs, filtre `/api/recherche` : la ligne `[Dossio] Aides-territoires a échoué — étape : …, HTTP …, message : …` dit pourquoi.
+
 ## 4. Tester
 
 - Fais 3 recherches pour de vrais projets que tu connais.
 - Rédige 1 ou 2 dossiers et télécharge-les en Word.
 - Note ce qui cloche : aide hors sujet, texte bizarre, message d'erreur.
-- Si une recherche affiche « La base Aides-territoires ne répond pas », signale-le : c'est la seule partie jamais essayée en vrai.
+- Si une recherche affiche « La base Aides-territoires ne répond pas », regarde Vercel → Logs (`/api/recherche`) : le code HTTP et le message d'Aides-territoires y sont écrits.
 
 ## Variables possibles (toutes facultatives)
 
@@ -46,6 +55,7 @@ L'offre gratuite de Vercel suffit pour tester. Pour vendre, il faudra l'offre Pr
 | --- | --- | --- |
 | `NEXT_PUBLIC_DOSSIO_ETAT` | `demo`, `essai` ou `production` | bandeau en haut des pages |
 | `NEXT_PUBLIC_DOSSIO_CONTACT` | une adresse e-mail | lien « Contact » en pied de page |
+| `AIDES_TERRITOIRES_API_KEY` | ta clé Aides-territoires | vraies aides publiques (sans elle : exemples fictifs) |
 | `DOSSIO_MODE_DEMO` | `1` | seulement les aides fictives |
 | `ANTHROPIC_API_KEY` | ta clé | rédaction par Claude |
 | `ANTHROPIC_MODELE` | un nom de modèle | sinon `claude-sonnet-4-5` (vérifier sur docs.claude.com) |

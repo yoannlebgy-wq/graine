@@ -31,9 +31,11 @@ npm run dev
 
 Puis ouvrir http://localhost:3000.
 
-Sans aucun réglage, le site cherche les vraies aides (Aides-territoires + liste vérifiée à la main) et la rédaction est simulée.
+Le site cherche les vraies aides (Aides-territoires + liste vérifiée à la main) ; la rédaction est simulée sans clé Anthropic.
+Depuis 2026, Aides-territoires exige une clé API (`AIDES_TERRITOIRES_API_KEY` ci-dessous) : sans elle, l'API refuse l'accès et le site montre des exemples fictifs.
 Réglages utiles dans `.env.local` (voir `.env.example`) :
 
+- `AIDES_TERRITOIRES_API_KEY` : clé API Aides-territoires, obligatoire depuis 2026 (sans elle, l'API répond 401 « JWT Token not found ») ; Dossio l'échange contre un jeton JWT ;
 - `DOSSIO_MODE_DEMO=1` : seulement les 16 aides fictives, sans appel à Aides-territoires ;
 - `ANTHROPIC_API_KEY` + `DOSSIO_REDACTION_SANS_COMPTE=1` : vraie rédaction par Claude (pour tester : sans comptes, n'importe qui peut l'utiliser) ;
 - `NEXT_PUBLIC_DOSSIO_ETAT` : bandeau du haut (`demo`, `essai` ou `production`).
