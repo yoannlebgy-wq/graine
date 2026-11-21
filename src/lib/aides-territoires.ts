@@ -1,4 +1,8 @@
-// Branchement sur l'API publique Aides-territoires (version 1.1, Licence Ouverte v2.0, sans jeton).
+// Branchement sur l'API Aides-territoires (version 1.1, données sous Licence Ouverte v2.0).
+// Depuis 2026, l'API exige une authentification (constat du 21 nov. 2026 : {"code":401,"message":"JWT Token not found"}).
+// Parcours documenté par Aides-territoires : clé API personnelle (compte → « Ma clé API ») ;
+// POST /api/connexion/ avec l'en-tête X-AUTH-TOKEN: <clé> → { "token": "<JWT>" } ;
+// puis chaque appel porte l'en-tête Authorization: Bearer <JWT>. La clé et le jeton ne sont jamais journalisés.
 // Constat du 18 nov. 2026 : l'API renvoie environ 1 650 aides, ignore le filtre « public visé »
 // et contient des fiches anciennes. Dossio trie donc lui-même : public, territoire, date, fraîcheur.
 import type { Aide } from './aides';
@@ -172,27 +176,115 @@ export function convertirAide(brut: AideBrute, maintenant: Date = new Date()): A
 
 type Recuperateur = (url: string, init?: RequestInit) => Promise<Response>;
 
+/** Erreur d'Aides-territoires, avec ce qu'il faut pour la journaliser (jamais la clé ni le jeton). */
+export class ErreurAidesTerritoires extends Error {
+  constructor(
+    readonly etape: 'connexion' | 'aides',
+    readonly statut: number | null,
+    readonly detail: string,
+  ) {
+    super(`Aides-territoires (${etape}) a répondu ${statut ?? 'sans code HTTP'} : ${detail}`);
+    this.name = 'ErreurAidesTerritoires';
+  }
+}
+
+/** Le jeton JWT est gardé en mémoire 23 h (validité annoncée : 24 h) ; un refus 401 le fait redemander. */
+export const DUREE_JETON_MS = 23 * 60 * 60 * 1000;
+let jetonEnCache: { valeur: string; cle: string; expire: number } | null = null;
+
+export function oublierJeton() {
+  jetonEnCache = null;
+}
+
+/** Adresse du point de connexion, sur le même site que l'adresse des aides. */
+export function urlConnexion(urlAides: string = URL_API_PAR_DEFAUT): string {
+  return `${new URL(urlAides).origin}/api/connexion/`;
+}
+
+/** Message lisible tiré d'une réponse en erreur (JSON {"message"} ou texte), coupé à 200 caractères. */
+async function lireDetail(r: Response): Promise<string> {
+  let texte = '';
+  try {
+    texte = await r.text();
+  } catch {
+    return '(réponse illisible)';
+  }
+  try {
+    const json = JSON.parse(texte) as { message?: unknown; detail?: unknown };
+    const m = json.message ?? json.detail;
+    if (typeof m === 'string' && m) return m.slice(0, 200);
+  } catch {
+    // pas du JSON : on garde le texte
+  }
+  return texte.trim().slice(0, 200) || '(réponse vide)';
+}
+
+async function appeler(recuperer: Recuperateur, url: string, init: RequestInit, delaiMs: number, etape: 'connexion' | 'aides'): Promise<Response> {
+  const controle = new AbortController();
+  const minuteur = setTimeout(() => controle.abort(), delaiMs);
+  try {
+    return await recuperer(url, { ...init, signal: controle.signal });
+  } catch (e) {
+    const raison = controle.signal.aborted ? `pas de réponse en ${Math.round(delaiMs / 1000)} s` : e instanceof Error ? e.message : String(e);
+    throw new ErreurAidesTerritoires(etape, null, `erreur réseau (${raison})`);
+  } finally {
+    clearTimeout(minuteur);
+  }
+}
+
+/** Échange la clé API contre un jeton JWT (mis en cache). */
+export async function obtenirJeton({
+  cle,
+  urlAides = URL_API_PAR_DEFAUT,
+  recuperer = fetch,
+  maintenant = new Date(),
+  delaiMs = 15_000,
+  forcer = false,
+}: { cle: string; urlAides?: string; recuperer?: Recuperateur; maintenant?: Date; delaiMs?: number; forcer?: boolean }): Promise<string> {
+  if (!forcer && jetonEnCache && jetonEnCache.cle === cle && maintenant.getTime() < jetonEnCache.expire) return jetonEnCache.valeur;
+  const r = await appeler(recuperer, urlConnexion(urlAides), { method: 'POST', headers: { Accept: 'application/json', 'X-AUTH-TOKEN': cle } }, delaiMs, 'connexion');
+  if (!r.ok) throw new ErreurAidesTerritoires('connexion', r.status, await lireDetail(r));
+  let token: unknown;
+  try {
+    token = ((await r.json()) as { token?: unknown }).token;
+  } catch {
+    token = undefined;
+  }
+  if (typeof token !== 'string' || !token) throw new ErreurAidesTerritoires('connexion', r.status, 'réponse sans champ « token »');
+  jetonEnCache = { valeur: token, cle, expire: maintenant.getTime() + DUREE_JETON_MS };
+  return token;
+}
+
 /** Télécharge toutes les pages de l'API (en suivant « next ») et garde les aides utilisables. */
 export async function chargerAidesTerritoires({
   url = URL_API_PAR_DEFAUT,
+  cle,
   recuperer = fetch,
   maintenant = new Date(),
   pagesMax = PAGES_MAX,
   delaiMs = 15_000,
-}: { url?: string; recuperer?: Recuperateur; maintenant?: Date; pagesMax?: number; delaiMs?: number } = {}): Promise<{ aides: Aide[]; recues: number; ecartees: number }> {
+}: { url?: string; cle?: string; recuperer?: Recuperateur; maintenant?: Date; pagesMax?: number; delaiMs?: number } = {}): Promise<{ aides: Aide[]; recues: number; ecartees: number }> {
   const aides: Aide[] = [];
   let recues = 0;
   let suivante: string | null = url;
+  let jeton = cle ? await obtenirJeton({ cle, urlAides: url, recuperer, maintenant, delaiMs }) : null;
+  let jetonRenouvele = false;
   for (let page = 0; suivante && page < pagesMax; page++) {
-    const controle = new AbortController();
-    const minuteur = setTimeout(() => controle.abort(), delaiMs);
-    let r: Response;
-    try {
-      r = await recuperer(suivante, { headers: { Accept: 'application/json' }, signal: controle.signal });
-    } finally {
-      clearTimeout(minuteur);
+    const entetes: Record<string, string> = { Accept: 'application/json' };
+    // Le jeton ne part que vers le site d'Aides-territoires lui-même (jamais vers une autre adresse donnée par « next »).
+    if (jeton && new URL(suivante).origin === new URL(url).origin) entetes.Authorization = `Bearer ${jeton}`;
+    const r = await appeler(recuperer, suivante, { headers: entetes }, delaiMs, 'aides');
+    if (r.status === 401 && cle && !jetonRenouvele) {
+      // Jeton expiré ou révoqué : on en redemande un, une seule fois, et on refait la même page.
+      jetonRenouvele = true;
+      jeton = await obtenirJeton({ cle, urlAides: url, recuperer, maintenant, delaiMs, forcer: true });
+      page--;
+      continue;
     }
-    if (!r.ok) throw new Error(`Aides-territoires a répondu ${r.status}`);
+    if (!r.ok) {
+      const detail = await lireDetail(r);
+      throw new ErreurAidesTerritoires('aides', r.status, r.status === 401 && !cle ? `${detail} — clé API manquante : renseignez AIDES_TERRITOIRES_API_KEY` : detail);
+    }
     const data = (await r.json()) as { next?: string | null; results?: AideBrute[] };
     for (const brut of data.results ?? []) {
       recues++;
