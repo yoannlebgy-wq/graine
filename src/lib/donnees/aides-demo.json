@@ -1,0 +1,542 @@
+[
+ {
+  "source": "demo",
+  "eligibilite": "Associations sportives affiliées à une fédération, siège dans le département.",
+  "url": "https://aides-territoires.beta.gouv.fr/",
+  "url_depot": "",
+  "types": [
+   "Subvention"
+  ],
+  "appel_a_projets": false,
+  "recurrence": "Permanente",
+  "taux_min": null,
+  "taux_max": 50,
+  "maj": "2026-11-01",
+  "id": "demo-01",
+  "nom": "Fonds départemental d'équipement des clubs sportifs (exemple démo)",
+  "porteurs": "Conseil départemental (exemple)",
+  "description": "Aide à l'achat de matériel sportif durable et de véhicules de transport des licenciés pour les clubs sportifs amateurs du département. Priorité aux clubs accueillant des jeunes et aux projets de mutualisation entre clubs.",
+  "date_limite": "2027-02-28",
+  "perimetre": "Tarn-et-Garonne",
+  "portee": "departementale",
+  "departements": [
+   "82"
+  ],
+  "themes": [
+   "sport",
+   "jeunesse"
+  ],
+  "publics": [
+   "associations"
+  ]
+ },
+ {
+  "source": "demo",
+  "eligibilite": "Associations sportives de la région.",
+  "url": "https://aides-territoires.beta.gouv.fr/",
+  "url_depot": "",
+  "types": [
+   "Subvention"
+  ],
+  "appel_a_projets": true,
+  "recurrence": "Permanente",
+  "taux_min": null,
+  "taux_max": null,
+  "maj": "2026-11-01",
+  "id": "demo-02",
+  "nom": "Appel à projets « Sport pour toutes et tous » (exemple démo)",
+  "porteurs": "Région (exemple)",
+  "description": "Soutien aux projets qui développent la pratique sportive des publics éloignés : femmes, personnes en situation de handicap, habitants des quartiers prioritaires et des zones rurales.",
+  "date_limite": "2027-03-15",
+  "perimetre": "Occitanie",
+  "portee": "regionale",
+  "departements": [
+   "09",
+   "11",
+   "12",
+   "30",
+   "31",
+   "32",
+   "34",
+   "46",
+   "48",
+   "65",
+   "66",
+   "81",
+   "82"
+  ],
+  "themes": [
+   "sport",
+   "solidarite",
+   "sante"
+  ],
+  "publics": [
+   "associations"
+  ]
+ },
+ {
+  "source": "demo",
+  "eligibilite": "Associations de moins de deux salariés, tous secteurs.",
+  "url": "https://aides-territoires.beta.gouv.fr/",
+  "url_depot": "",
+  "types": [
+   "Subvention"
+  ],
+  "appel_a_projets": false,
+  "recurrence": "Annuelle",
+  "taux_min": null,
+  "taux_max": null,
+  "maj": "2026-11-01",
+  "id": "demo-03",
+  "nom": "Fonds pour le développement de la vie associative — fonctionnement et innovation (exemple démo)",
+  "porteurs": "État — service départemental (exemple)",
+  "description": "Financement du fonctionnement global des petites associations et de leurs projets innovants au service du territoire. Une attention particulière est portée aux associations qui renouvellent leur bénévolat.",
+  "date_limite": "2027-01-31",
+  "perimetre": "France",
+  "portee": "nationale",
+  "departements": [],
+  "themes": [
+   "citoyennete"
+  ],
+  "publics": [
+   "associations"
+  ]
+ },
+ {
+  "source": "demo",
+  "eligibilite": "Artistes professionnels, compagnies et collectifs constitués en association.",
+  "url": "https://aides-territoires.beta.gouv.fr/",
+  "url_depot": "",
+  "types": [
+   "Subvention"
+  ],
+  "appel_a_projets": true,
+  "recurrence": "Permanente",
+  "taux_min": null,
+  "taux_max": null,
+  "maj": "2026-11-01",
+  "id": "demo-04",
+  "nom": "Aide aux résidences et à la création artistique (exemple démo)",
+  "porteurs": "Direction régionale des affaires culturelles (exemple)",
+  "description": "Accompagnement des artistes et compagnies pour des résidences de création en lien avec un territoire et des actions de médiation auprès des habitants.",
+  "date_limite": "2027-04-10",
+  "perimetre": "Occitanie",
+  "portee": "regionale",
+  "departements": [
+   "09",
+   "11",
+   "12",
+   "30",
+   "31",
+   "32",
+   "34",
+   "46",
+   "48",
+   "65",
+   "66",
+   "81",
+   "82"
+  ],
+  "themes": [
+   "culture"
+  ],
+  "publics": [
+   "associations",
+   "particuliers"
+  ]
+ },
+ {
+  "source": "demo",
+  "eligibilite": "Associations loi 1901 actives depuis au moins un an.",
+  "url": "https://aides-territoires.beta.gouv.fr/",
+  "url_depot": "",
+  "types": [
+   "Subvention"
+  ],
+  "appel_a_projets": false,
+  "recurrence": "Permanente",
+  "taux_min": null,
+  "taux_max": null,
+  "maj": "2026-11-01",
+  "id": "demo-05",
+  "nom": "Fonds culture et lien social en milieu rural (exemple démo)",
+  "porteurs": "Fondation d'entreprise (exemple)",
+  "description": "Soutien aux festivals, ateliers et lieux culturels qui créent du lien entre générations dans les communes de moins de 10 000 habitants.",
+  "date_limite": "2027-05-30",
+  "perimetre": "France",
+  "portee": "nationale",
+  "departements": [],
+  "themes": [
+   "culture",
+   "citoyennete"
+  ],
+  "publics": [
+   "associations"
+  ]
+ },
+ {
+  "source": "demo",
+  "eligibilite": "Associations caritatives et de solidarité.",
+  "url": "https://aides-territoires.beta.gouv.fr/",
+  "url_depot": "",
+  "types": [
+   "Subvention"
+  ],
+  "appel_a_projets": false,
+  "recurrence": "Permanente",
+  "taux_min": null,
+  "taux_max": null,
+  "maj": "2026-11-01",
+  "id": "demo-06",
+  "nom": "Soutien aux actions de solidarité alimentaire (exemple démo)",
+  "porteurs": "Conseil départemental (exemple)",
+  "description": "Aide aux associations qui distribuent des repas, des colis ou animent des épiceries solidaires, y compris pour l'achat de matériel de stockage et de transport.",
+  "date_limite": "2027-01-15",
+  "perimetre": "Gironde",
+  "portee": "departementale",
+  "departements": [
+   "33"
+  ],
+  "themes": [
+   "solidarite"
+  ],
+  "publics": [
+   "associations"
+  ]
+ },
+ {
+  "source": "demo",
+  "eligibilite": "Associations et collectifs de jeunes accompagnés par une structure.",
+  "url": "https://aides-territoires.beta.gouv.fr/",
+  "url_depot": "",
+  "types": [
+   "Subvention"
+  ],
+  "appel_a_projets": false,
+  "recurrence": "Permanente",
+  "taux_min": null,
+  "taux_max": null,
+  "maj": "2026-11-01",
+  "id": "demo-07",
+  "nom": "Initiatives jeunesse et engagement (exemple démo)",
+  "porteurs": "Caisse d'allocations familiales (exemple)",
+  "description": "Financement de projets portés par ou pour des jeunes de 11 à 25 ans : séjours, chantiers, projets solidaires, accompagnement à la scolarité.",
+  "date_limite": "2027-06-30",
+  "perimetre": "Rhône",
+  "portee": "departementale",
+  "departements": [
+   "69"
+  ],
+  "themes": [
+   "jeunesse",
+   "citoyennete"
+  ],
+  "publics": [
+   "associations"
+  ]
+ },
+ {
+  "source": "demo",
+  "eligibilite": "Associations de la région, projet avec un impact mesurable.",
+  "url": "https://aides-territoires.beta.gouv.fr/",
+  "url_depot": "",
+  "types": [
+   "Subvention"
+  ],
+  "appel_a_projets": true,
+  "recurrence": "Permanente",
+  "taux_min": null,
+  "taux_max": null,
+  "maj": "2026-11-01",
+  "id": "demo-08",
+  "nom": "Transition écologique des associations (exemple démo)",
+  "porteurs": "Agence régionale (exemple)",
+  "description": "Aide aux projets d'économies d'énergie, de réemploi, de jardins partagés et de mobilité douce portés par des associations.",
+  "date_limite": "2027-03-31",
+  "perimetre": "Nouvelle-Aquitaine",
+  "portee": "regionale",
+  "departements": [
+   "16",
+   "17",
+   "19",
+   "23",
+   "24",
+   "33",
+   "40",
+   "47",
+   "64",
+   "79",
+   "86",
+   "87"
+  ],
+  "themes": [
+   "environnement"
+  ],
+  "publics": [
+   "associations",
+   "entreprises"
+  ]
+ },
+ {
+  "source": "demo",
+  "eligibilite": "Associations d'intérêt général.",
+  "url": "https://aides-territoires.beta.gouv.fr/",
+  "url_depot": "",
+  "types": [
+   "Subvention"
+  ],
+  "appel_a_projets": false,
+  "recurrence": "Permanente",
+  "taux_min": null,
+  "taux_max": null,
+  "maj": "2026-11-01",
+  "id": "demo-09",
+  "nom": "Numérique pour tous (exemple démo)",
+  "porteurs": "Fondation d'entreprise (exemple)",
+  "description": "Équipement informatique et ateliers d'inclusion numérique pour les publics fragiles.",
+  "date_limite": null,
+  "perimetre": "France",
+  "portee": "nationale",
+  "departements": [],
+  "themes": [
+   "numerique",
+   "solidarite"
+  ],
+  "publics": [
+   "associations"
+  ]
+ },
+ {
+  "source": "demo",
+  "eligibilite": "Entreprises de moins de 3 ans.",
+  "url": "https://aides-territoires.beta.gouv.fr/",
+  "url_depot": "",
+  "types": [
+   "Subvention"
+  ],
+  "appel_a_projets": false,
+  "recurrence": "Permanente",
+  "taux_min": null,
+  "taux_max": null,
+  "maj": "2026-11-01",
+  "id": "demo-10",
+  "nom": "Aide à la création de très petites entreprises (exemple démo)",
+  "porteurs": "Région (exemple)",
+  "description": "Subvention et prêt d'honneur pour les créateurs et repreneurs de très petites entreprises, artisans et commerçants.",
+  "date_limite": null,
+  "perimetre": "Hauts-de-France",
+  "portee": "regionale",
+  "departements": [
+   "02",
+   "59",
+   "60",
+   "62",
+   "80"
+  ],
+  "themes": [
+   "economie",
+   "emploi"
+  ],
+  "publics": [
+   "entreprises"
+  ]
+ },
+ {
+  "source": "demo",
+  "eligibilite": "Associations de quartier et comités des fêtes.",
+  "url": "https://aides-territoires.beta.gouv.fr/",
+  "url_depot": "",
+  "types": [
+   "Subvention"
+  ],
+  "appel_a_projets": false,
+  "recurrence": "Permanente",
+  "taux_min": null,
+  "taux_max": null,
+  "maj": "2026-11-01",
+  "id": "demo-11",
+  "nom": "Fêtes et animations de quartier (exemple démo)",
+  "porteurs": "Ville (exemple)",
+  "description": "Petites subventions pour les fêtes de quartier, repas partagés et animations de rue qui favorisent le lien social.",
+  "date_limite": "2027-02-15",
+  "perimetre": "Paris",
+  "portee": "departementale",
+  "departements": [
+   "75"
+  ],
+  "themes": [
+   "citoyennete",
+   "culture"
+  ],
+  "publics": [
+   "associations"
+  ]
+ },
+ {
+  "source": "demo",
+  "eligibilite": "Clubs et associations sportives labellisés ou en cours de labellisation.",
+  "url": "https://aides-territoires.beta.gouv.fr/",
+  "url_depot": "",
+  "types": [
+   "Subvention"
+  ],
+  "appel_a_projets": false,
+  "recurrence": "Permanente",
+  "taux_min": null,
+  "taux_max": null,
+  "maj": "2026-11-01",
+  "id": "demo-12",
+  "nom": "Sport santé et activité physique adaptée (exemple démo)",
+  "porteurs": "Agence régionale (exemple)",
+  "description": "Développement des créneaux de sport santé pour les personnes âgées ou atteintes de maladies chroniques, en lien avec les professionnels de santé.",
+  "date_limite": "2027-04-30",
+  "perimetre": "Provence-Alpes-Côte d'Azur",
+  "portee": "regionale",
+  "departements": [
+   "04",
+   "05",
+   "06",
+   "13",
+   "83",
+   "84"
+  ],
+  "themes": [
+   "sport",
+   "sante"
+  ],
+  "publics": [
+   "associations"
+  ]
+ },
+ {
+  "source": "demo",
+  "eligibilite": "Associations et groupes informels de jeunes.",
+  "url": "https://aides-territoires.beta.gouv.fr/",
+  "url_depot": "",
+  "types": [
+   "Subvention"
+  ],
+  "appel_a_projets": true,
+  "recurrence": "Permanente",
+  "taux_min": null,
+  "taux_max": null,
+  "maj": "2026-11-01",
+  "id": "demo-13",
+  "nom": "Échanges européens de jeunes (exemple démo)",
+  "porteurs": "Agence nationale (exemple)",
+  "description": "Financement de rencontres et de projets de mobilité de groupes de jeunes en Europe.",
+  "date_limite": "2027-02-20",
+  "perimetre": "France",
+  "portee": "nationale",
+  "departements": [],
+  "themes": [
+   "international",
+   "jeunesse"
+  ],
+  "publics": [
+   "associations",
+   "particuliers"
+  ]
+ },
+ {
+  "source": "demo",
+  "eligibilite": "Associations gestionnaires d'un lieu patrimonial.",
+  "url": "https://aides-territoires.beta.gouv.fr/",
+  "url_depot": "",
+  "types": [
+   "Subvention"
+  ],
+  "appel_a_projets": false,
+  "recurrence": "Permanente",
+  "taux_min": null,
+  "taux_max": null,
+  "maj": "2026-11-01",
+  "id": "demo-14",
+  "nom": "Patrimoine et petits musées associatifs (exemple démo)",
+  "porteurs": "Conseil départemental (exemple)",
+  "description": "Restauration d'objets, numérisation de collections et médiation culturelle dans les musées gérés par des associations.",
+  "date_limite": "2026-10-01",
+  "perimetre": "Tarn-et-Garonne",
+  "portee": "departementale",
+  "departements": [
+   "82"
+  ],
+  "themes": [
+   "culture"
+  ],
+  "publics": [
+   "associations"
+  ]
+ },
+ {
+  "source": "demo",
+  "eligibilite": "Associations employant au moins un salarié.",
+  "url": "https://aides-territoires.beta.gouv.fr/",
+  "url_depot": "",
+  "types": [
+   "Subvention"
+  ],
+  "appel_a_projets": false,
+  "recurrence": "Permanente",
+  "taux_min": null,
+  "taux_max": null,
+  "maj": "2026-11-01",
+  "id": "demo-15",
+  "nom": "Fonds d'urgence aux associations employeuses (exemple démo)",
+  "porteurs": "Région (exemple)",
+  "description": "Soutien ponctuel à la trésorerie des associations employeuses confrontées à une baisse de leurs ressources.",
+  "date_limite": "2027-01-10",
+  "perimetre": "Auvergne-Rhône-Alpes",
+  "portee": "regionale",
+  "departements": [
+   "01",
+   "03",
+   "07",
+   "15",
+   "26",
+   "38",
+   "42",
+   "43",
+   "63",
+   "69",
+   "73",
+   "74"
+  ],
+  "themes": [
+   "emploi",
+   "citoyennete"
+  ],
+  "publics": [
+   "associations"
+  ]
+ },
+ {
+  "source": "demo",
+  "eligibilite": "Personnes physiques de moins de 30 ans résidant en France.",
+  "url": "https://aides-territoires.beta.gouv.fr/",
+  "url_depot": "",
+  "types": [
+   "Subvention"
+  ],
+  "appel_a_projets": false,
+  "recurrence": "Permanente",
+  "taux_min": null,
+  "taux_max": null,
+  "maj": "2026-11-01",
+  "id": "demo-16",
+  "nom": "Bourse aux jeunes artistes (exemple démo)",
+  "porteurs": "Fondation (exemple)",
+  "description": "Bourse individuelle pour les artistes de moins de 30 ans : production d'une première œuvre, d'un spectacle ou d'un album.",
+  "date_limite": "2027-03-01",
+  "perimetre": "France",
+  "portee": "nationale",
+  "departements": [],
+  "themes": [
+   "culture",
+   "jeunesse"
+  ],
+  "publics": [
+   "particuliers"
+  ]
+ }
+]
